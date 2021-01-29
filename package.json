@@ -1,0 +1,22 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js "
+  },
+  "author": "Iván C.M.",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "imageapi.js": "^1.0.19",
+    "jikan-node": "^1.2.1",
+    "node-fetch": "^2.6.1",
+    "random-puppy": "^1.1.0",
+    "snekfetch": "^4.0.4",
+    "snoowrap": "^1.21.0",
+    "ytdl-core": "^2.1.7"
+  }
+}
