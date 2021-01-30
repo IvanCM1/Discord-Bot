@@ -1,6 +1,8 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const ownerID = process.env.OWNER_ID
+const token = process.env.CLIENT_TOKEN
+const prefix = "?"
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();

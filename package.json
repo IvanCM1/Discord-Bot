@@ -1,22 +1,25 @@
 {
-  "name": "discord-bot",
+  "name": "Discord-Bot",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js "
+    "start": "node index.js"
   },
-  "author": "Iván C.M.",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanCM1/Discord-Bot.git"
+  },
   "keywords": [],
-  "description": "",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanCM1/Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/IvanCM1/Discord-Bot#readme",
   "dependencies": {
-    "discord.js": "^12.2.0",
-    "imageapi.js": "^1.0.19",
+    "discord.js": "^12.5.1",
     "jikan-node": "^1.2.1",
-    "node-fetch": "^2.6.1",
-    "random-puppy": "^1.1.0",
-    "snekfetch": "^4.0.4",
-    "snoowrap": "^1.21.0",
-    "ytdl-core": "^2.1.7"
+    "snoowrap": "^1.22.0"
   }
 }

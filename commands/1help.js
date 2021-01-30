@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix } = require('../config.json');
+const prefix = "?";
 module.exports = {
     name: "help",
     description: "Gives a list of all the commands or information about a specific command",
