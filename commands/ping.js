@@ -4,6 +4,7 @@ module.exports = {
 	usage: "",
 	aliases: [" "],
 	execute(message) {
-		message.channel.send('Pong!');
+    let ping = Date.now() - message.createdTimestamp
+		message.channel.send("Latency: " + ping);
 	},
 };

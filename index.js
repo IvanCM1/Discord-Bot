@@ -106,4 +106,13 @@ client.on('message', message => {
 	}
 });
 
+//Web server
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('ok');
+});
+server.listen(3000);
+
+//Logins the bot into discord
 client.login(token);

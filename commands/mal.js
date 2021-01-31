@@ -30,9 +30,6 @@ module.exports = {
                 .setImage(anime.image_url)
                 .setDescription(anime.synopsis)
                 .addFields(
-                  { name: '\u200B', value: '\u200B', inline: true},
-                  { name: '\u200B', value: '\u200B', inline: true},
-                  { name: '\u200B', value: '\u200B', inline: true},
                   {name: "Score: ", value: anime.score, inline: true},
                   {name: "Episodes: ", value: eps, inline: true}
                 )

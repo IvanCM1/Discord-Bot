@@ -20,7 +20,8 @@ module.exports = {
         var subreddit = subreddits[RandomSubreddit]
         //Submission
         r.getSubreddit(subreddit).getHot().then(submission => {
-            var RandomPost = Math.floor(Math.random() * submission.length) + 2
+            var hotPosts = submission.length - 2
+            var RandomPost = Math.floor(Math.random() * hotPosts) + 2
             var post = submission[RandomPost]
             var upvotes = Math.round(post.ups/1000)
             const MemeEmbed = new Discord.MessageEmbed()
