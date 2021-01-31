@@ -1,1 +1,1 @@
-# Discord-Bot
+# Okami-Discord-Bot
