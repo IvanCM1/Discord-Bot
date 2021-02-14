@@ -1,5 +1,6 @@
 module.exports = {
     name: "repeat",
+    code: "`repeat`, ",
     description: "Repeats whatever you say and deletes your original message",
     args: true,
     usage: "<phrase to repeat>",

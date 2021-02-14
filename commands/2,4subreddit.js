@@ -3,6 +3,7 @@ const { Submission } = require('snoowrap');
 const snoowrap = require('snoowrap');
 module.exports = {
   name: 'subreddit',
+  code: "`subreddit`, ",
   description: 'Provides an image for a given subreddit',
   usage: "<subreddit>",
   args: true,

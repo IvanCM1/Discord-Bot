@@ -3,6 +3,7 @@ const Jikan = require('jikan-node');
 const mal = new Jikan();
 module.exports = {
   name: 'anime',
+  code: "`anime`",
   description: 'Displays the synopsis, score and number of episodes of an anime',
   usage: "<anime to search>",
   args: true,

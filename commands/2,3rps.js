@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-const { args } = require('./userinfo');
 module.exports = {
 	name: 'rps',
+  code: "`rps`, ",
 	description: 'Plays rock paper scissors with you!',
 	usage: "<paper, rock or scissors>",
 	args: true,

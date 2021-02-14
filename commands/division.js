@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 module.exports = {
     name: "/",
+    code: "`/`, ",
     description: "Makes a division between 2 numbers",
     usage: "<dividend> <divisor>",
     args: true,

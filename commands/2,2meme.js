@@ -3,6 +3,7 @@ const { Submission } = require('snoowrap');
 const snoowrap = require('snoowrap');
 module.exports = {
   name: 'meme',
+  code: "`meme`, ",
   description: 'A fresh meme from Reddit!',
   usage: "",
   aliases: ["memes"],

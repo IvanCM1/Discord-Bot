@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'lenny',
+  code: "`lenny`, ",
 	description: "Sends a Lenny!",
 	usage: "",
 	aliases: [" "],

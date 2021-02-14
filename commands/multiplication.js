@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 module.exports = {
     name: "*",
+    code: "`*`, ",
     description: "Makes a multiplication between 2 numbers",
     usage: "<number> <number>",
     args: true,

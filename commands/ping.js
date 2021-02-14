@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'ping',
+  code: "`ping`, ",
 	description: 'Ping!',
 	usage: "",
 	aliases: [" "],

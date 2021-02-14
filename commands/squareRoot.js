@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 module.exports = {
-    name: "sqrt",
+  name: "sqrt",
+  code: "`sqrt`, ",
 	description: "Makes the square root of a number",
 	usage: "<number>",
 	args: true,

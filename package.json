@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/IvanCM1/Discord-Bot#readme",
   "dependencies": {
+    "colorthief": "^2.3.2",
     "discord.js": "^12.5.1",
     "jikan-node": "^1.2.1",
     "snoowrap": "^1.22.0"
