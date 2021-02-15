@@ -21,6 +21,7 @@
     "colorthief": "^2.3.2",
     "discord.js": "^12.5.1",
     "jikan-node": "^1.2.1",
+    "request": "^2.88.2",
     "snoowrap": "^1.22.0"
   }
 }
