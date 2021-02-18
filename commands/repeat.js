@@ -12,7 +12,7 @@ module.exports = {
 		for (var i = 1; i < ArgsLength; i++) {
 			repetition = repetition + " " + args[i]
         }
-        message.channel.bulkDelete(1, true)
+    message.channel.bulkDelete(1, true)
 		message.channel.send(repetition)
     }
 }

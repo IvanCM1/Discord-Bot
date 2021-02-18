@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 module.exports = {
   name: "+",
-  code: "`+`",
+  code: "`+`, ",
 	description: "Makes a sum of 2 numbers",
 	usage: "<number> <number>",
 	args: true,
