@@ -1,10 +1,17 @@
 const fs = require('fs');
 const Discord = require('discord.js');
+const search = require('youtube-search');
+
+const opts = {
+  maxResults: 1,
+  key: process.env.YOUTUBE_API_KEY,
+  type: "video"
+};
 const ytdl = require('ytdl-core');
 const ownerID = process.env.OWNER_ID
 const token = process.env.CLIENT_TOKEN
 const prefix = "?"
-
+const queue = new Map()
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -69,39 +76,101 @@ client.on('message', message => {
 })
 
 //MUSIC COMMANDS    
-/*client.on('message', async message => {
+client.on('message', message => {
   if (message.author.bot) return;
 
   var msg = message.content.toLowerCase()
   const args = message.content.trim().split(/ +/);
-  if (args[0] === "?play" || "?stop") {
+  const cmnd = args[0]
 
+  if (cmnd === "?play" || cmnd === "?stop" || cmnd === "?skip" || cmnd === "?leave" || cmnd === "?disconnect") {
 
-  //Play commmand
-  if (args[0] === "?play") {
-    
-    else {
-      message.channel.send("You must be in a voice channel for me to join")
-    }//
-
-  } //End of ?play if
-if (args[0] === "?stop") {
-  if (connection) {
- 
-  connection.disconnect()
-
-  message.channel.send("Sound stopped!")
-  }//End of voice if
-  else {
-    message.channel.send("You need to be in the same you want to stop the sound in")
-  }//
+    const serverQueue = queue.get(message.guild.id)
 
 
 
-  } //End of ?stop if
-  } //End of ?<all commands> if
-}) //End of client.on
-*/
+      var song = args[1]
+      var lu = args.length - 1
+      for (var i = 2; i < lu; i++) {
+        song = song + " " + args[i]
+      }
+
+      function player(guild, song, pre) {
+        const songQueue = queue.get(guild.id)
+
+        if (!song) {
+          songQueue.voiceChannel.leave()
+          queue.delete(guild.id)
+        }
+        else {
+            search(song, opts, function(err, results) {
+              if (err) return console.log(err) & message.channel.send("There was an error with the Youtube API\n*This bot may have run out of free searches*\nUse a youtube link instead")
+              let result = results[0]
+              songQueue.voiceChannel.join()
+                .then(connection => {
+
+                  const stream = ytdl(result.link, { filter: 'audioonly' });
+
+                  const dispatcher = connection.play(stream, { volume: 0.5 })
+
+                  dispatcher.on('start', () => {
+                    message.channel.send(result.title + ' is now playing!');
+
+                  });
+                  dispatcher.on('finish', () => {
+                    songQueue.songs.shift()
+                    player(guild, songQueue.songs[0])
+                    message.channel.send(result.title + ' has finished playing!');
+                  });
+                })//end
+            })//end of search function 
+        }//end of else
+      }//end of function player
+    //?play
+    if (cmnd === "?play") {
+      if (!serverQueue) {
+        const queueConstructor = {
+          voiceChannel: message.member.voice.channel,
+          textChannel: message.channel,
+          connection: null,
+          songs: []
+        }
+
+        queue.set(message.guild.id, queueConstructor)
+        queueConstructor.songs.push(song)
+
+        const connection = queueConstructor.voiceChannel.join();
+        queueConstructor.connection = connection;
+        player(message.guild, queueConstructor.songs[0]);
+
+      }
+      else {
+        serverQueue.songs.push(song)
+        message.channel.send("Song added to the queue")
+      }
+    }//end of ?play          //?stop
+    else if (cmnd === "?stop" || cmnd === "?leave" || cmnd === "?disconnect") {
+      serverQueue.songs = []
+      serverQueue.voiceChannel.leave()
+      queue.delete(message.guild.id)
+
+      message.channel.send("Music stopped and queue cleared!")
+    }
+    else if (cmnd === "?skip") {
+
+      if (!serverQueue || serverQueue.songs.length < 2) {
+        message.channel.send("There are no songs waiting in queue")
+      }
+      else {
+        const songQueue = queue.get(message.guild.id)
+        songQueue.songs.shift()
+        player(message.guild, songQueue.songs[0])
+        message.channel.send("Song skipped")
+      }
+    }
+  }//end of if all commands
+}) //end of client.on
+
 
 client.on('message', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
