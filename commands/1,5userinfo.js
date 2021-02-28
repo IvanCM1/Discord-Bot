@@ -34,16 +34,31 @@ module.exports = {
 
             ColorThief.getColor(taggedAvatar)
               .then(color => {
-                const UserInfo = new Discord.MessageEmbed()
+                function embed(admin) {
+                const userInfo = new Discord.MessageEmbed()
                 .setColor(color)
                 .setTitle(taggedUser.username + "'s Data")
                 .setThumbnail(taggedAvatar)
                 .addFields(
                   {name: "Username", value: taggedUser, inline: true},
+                  {name: "\u200b", value: "\u200b", inline: true},
+                  {name: "Discriminator", value: "#" + taggedUser.discriminator, inline: true},
+                  {name: "Administrator", value: admin, inline: true},
+                  {name: "\u200b", value: "\u200b", inline: true},
                   {name: "User ID", value: member.id, inline: true}
+
                 )
 
-            message.channel.send(UserInfo)
+                message.channel.send(userInfo)
+                }
+
+                if (member.permissions.has("ADMINISTRATOR")) {
+                  embed("True")
+                }
+                else {
+                  embed("False")
+                }
+
               })
               .catch(err => { console.log(err) })
 

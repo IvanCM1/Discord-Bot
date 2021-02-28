@@ -16,7 +16,7 @@ module.exports = {
 		const rpsEmbed = new Discord.MessageEmbed()
 			.setColor("FFFFFF")
 			.setTitle(WEL)
-			.setThumbnail("https://i.imgur.com/gVEmgaG.png")
+			.setThumbnail("https://i.ibb.co/Ks1jDmS/gVEmgaG.png")
 			.addFields(
 				{name: "*I chose:*", value: "`" + election + "`", inline: true},
 				{name: "*You chose:*", value: "`" + args[0] + "`", inline: true}

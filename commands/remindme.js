@@ -23,7 +23,7 @@ module.exports = {
       .setColor("#7289DA")
       .setTitle("You Have A Notification!")
       .addField("Your reminder:", "`" + reminder + "`", true)
-      .setThumbnail("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png")
+      .setThumbnail("https://cdn.discordapp.com/attachments/716716420179951726/813497897697935380/no-bg.png")
 
     function alert() {
       message.author.send(alertEmbed)
@@ -37,7 +37,7 @@ module.exports = {
           {name: "Time:", value: "`" + givenTime + " " + timeUnit + "`", inline: true},
           {name: "Reminder", value: "`" + reminder + "`", inline: true}
         )
-        .setThumbnail("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png")
+        .setThumbnail("https://cdn.discordapp.com/attachments/716716420179951726/813497897697935380/no-bg.png")
       message.channel.send(confEmbed)
     }
 

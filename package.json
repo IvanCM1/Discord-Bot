@@ -24,9 +24,19 @@
     "discord.js": "^12.5.1",
     "ffmpeg-static": "^4.2.7",
     "jikan-node": "^1.2.1",
+    "mal-scraper": "^2.11.3",
+    "node-fetch": "^2.6.1",
+    "relevant-urban": "^2.0.0",
     "request": "^2.88.2",
+    "simpleyt": "^1.0.7",
     "snoowrap": "^1.22.0",
+    "translate": "^1.2.1",
+    "translate-google": "^1.4.3",
+    "usetube": "^2.0.0",
+    "wikipedia": "^1.0.2",
     "youtube-search": "^1.1.6",
+    "youtube-sr": "^4.0.1",
+    "yt-search": "^2.7.3",
     "ytdl-core": "^4.5.0"
   }
 }
