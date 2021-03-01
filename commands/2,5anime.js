@@ -49,21 +49,20 @@ module.exports = {
                 .setThumbnail(data.image_url)
                 .setDescription(data.synopsis)
                 .addFields(
-                  {name: "Status:", value: info.status, inline: true},
-                  {name: "Type:", value: info.type, inline: true},
-                  {name: "Source:", value: info.source, inline: true},
-                  {name: "Rating:", value: data.rated, inline: true},
-                  {name: "Genres:", value: genres, inline: true},
-                  {name: '\u200B', value: '\u200B', inline: true},
-                  {name: "Producers:", value: producers, inline: true},
-                  {name: "Studios:", value: studios, inline: true},
-                  {name: '\u200B', value: '\u200B', inline: true},
                   {name: "Score:", value: data.score, inline: true},
                   {name: "Ranked:", value: info.rank, inline: true},
                   {name: "Popularity:", value: info.popularity, inline: true},
-                  //{name: "Premiered:", value: data.premiered, inline: true},
+                  {name: "Type:", value: info.type, inline: true},
+                  {name: "Rating:", value: data.rated, inline: true},
+                  {name: "Source:", value: info.source, inline: true},
+                  {name: "Status:", value: info.status, inline: true},
                   {name: "Episodes:", value: data.episodes, inline: true},
-                  {name: "Duration:", value: info.duration, inline: true}
+                  {name: "Duration:", value: info.duration, inline: true},
+                  {name: "Producers:", value: producers, inline: true},
+                  {name: "Studios:", value: studios, inline: true},
+                  {name: '\u200B', value: '\u200B', inline: true},
+                  //{name: "Premiered:", value: data.premiered, inline: true},
+                  {name: "Genres:", value: genres, inline: true}
                 )
 
             message.channel.send(animeEmbed)
