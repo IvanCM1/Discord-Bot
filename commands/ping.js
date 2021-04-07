@@ -6,6 +6,6 @@ module.exports = {
 	aliases: [" "],
 	execute(message) {
     let ping = Date.now() - message.createdTimestamp
-		message.channel.send("Latency: " + ping);
+		message.channel.send("Latency: " + ping + "ms");
 	},
 };

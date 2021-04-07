@@ -20,11 +20,8 @@ module.exports = {
           .then(manga => {
             let data = manga.results[0]
 
-            console.log(data)
-
             mal.findManga(manga.results[0].mal_id)
             .then(info => {
-              console.log(info)
             
             let authors = info.authors[0].name
 
@@ -49,14 +46,14 @@ module.exports = {
                 .addFields(
                   {name: ":star: Score:", value: data.score, inline: true},
                   {name: ":medal: Ranked:", value: info.rank, inline: true},
-                  {name: "Popularity:", value: info.popularity, inline: true},
-                  {name: "Type:", value: info.type, inline: true},
-                  {name: "Status:", value: info.status, inline: true},
+                  {name: ":chart_with_upwards_trend: Popularity:", value: info.popularity, inline: true},
+                  {name: ":page_facing_up: Type:", value: info.type, inline: true},
+                  {name: ":printer: Status:", value: info.status, inline: true},
                   {name: "\u200b", value: "\u200b", inline: true},
-                  {name: "Volumes:", value: volumes, inline: true},
-                  {name: "Chapters:", value: chapters, inline: true},
+                  {name: ":books: Volumes:", value: volumes, inline: true},
+                  {name: ":book: Chapters:", value: chapters, inline: true},
                   //{name: "Premiered:", value: data.premiered, inline: true},
-                  {name: "Genres:", value: genres, inline: false}
+                  {name: ":label: Genres:", value: genres, inline: false}
                 )
 
             message.channel.send(animeEmbed)

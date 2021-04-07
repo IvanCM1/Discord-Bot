@@ -22,8 +22,7 @@ module.exports = {
 
             mal.findAnime(anime.results[0].mal_id)
             .then(info => {
-              console.log(info)
-          
+                        
             let producers = info.producers[0].name
 
             for (i = 1; i < info.producers.length; i++) {
@@ -42,33 +41,47 @@ module.exports = {
               genres = genres + ", " + info.genres[i].name
             }
 
+            function sendEmbed(episodes) {
             const animeEmbed = new Discord.MessageEmbed()
                 .setColor("#368BD6")
+                .setAuthor("Produced by " + producers)
                 .setTitle(data.title + " | " + info.title_japanese)
                 .setURL(data.url)
                 .setThumbnail(data.image_url)
                 .setDescription(data.synopsis)
                 .addFields(
-                  {name: "Score:", value: data.score, inline: true},
-                  {name: "Ranked:", value: info.rank, inline: true},
-                  {name: "Popularity:", value: info.popularity, inline: true},
-                  {name: "Type:", value: info.type, inline: true},
-                  {name: "Rating:", value: data.rated, inline: true},
-                  {name: "Source:", value: info.source, inline: true},
-                  {name: "Status:", value: info.status, inline: true},
-                  {name: "Episodes:", value: data.episodes, inline: true},
-                  {name: "Duration:", value: info.duration, inline: true},
-                  {name: "Producers:", value: producers, inline: true},
-                  {name: "Studios:", value: studios, inline: true},
-                  {name: '\u200B', value: '\u200B', inline: true},
+                  {name: ":star: Score:", value: data.score, inline: true},
+                  {name: ":medal: Ranked:", value: info.rank, inline: true},
+                  {name: ":chart_with_upwards_trend: Popularity:", value: info.popularity, inline: true},
+                  {name: ":film_frames: Type:", value: info.type, inline: true},
+                  {name: ":scales: Rating:", value: data.rated, inline: true},
+                  {name: ":page_facing_up: Source:", value: info.source, inline: true},
+                  {name: ":satellite: Status:", value: info.status, inline: true},
+                  {name: ":cd: Episodes:", value: episodes, inline: true},
+                  {name: ":stopwatch: Duration:", value: info.duration, inline: true},
+                  //{name: ":desktop: Producers:", value: producers, inline: true},
+                  {name: ":clapper: Studios:", value: studios, inline: true},
+                  //{name: '\u200B', value: '\u200B', inline: true},
                   //{name: "Premiered:", value: data.premiered, inline: true},
-                  {name: "Genres:", value: genres, inline: true}
+                  {name: ":label: Genres:", value: genres, inline: true}
                 )
 
             message.channel.send(animeEmbed)
+            }
+
+            if (data.episodes > 0) {
+              sendEmbed(data.episodes)
+            }
+            else {
+              sendEmbed("---")
+            }
+
+
+
             })
             .catch(err => {
               console.log(err)
+              message.channel.send("Something went wrong")
             })
           })
           .catch(err => {
