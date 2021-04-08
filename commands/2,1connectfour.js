@@ -54,6 +54,35 @@ module.exports = {
 
     refresh()
 
+    function inv() {
+      if (casillas[0] !== ":one:" || casillas[1] !== ":two:" || casillas[2] !== ":three:" || casillas[3] !== ":four:" || casillas[4] !== ":five:" || casillas[5] !== ":six:" || casillas[6] !== ":seven:")
+        casillas[0] = ":one:"
+        casillas[1] = ":two:"
+        casillas[2] = ":three:"
+        casillas[3] = ":four:"
+        casillas[4] = ":five:"
+        casillas[5] = ":six:"
+        casillas[6] = ":seven:"
+        message.channel.send("**Invalid choice, column full**")
+    }
+
+    var columnas = 8
+    
+    function comprobacion(color) {
+        for (i=columnas; i <= numCasillas - 4*columnas; i++) {
+    
+            casilla1 = tablero[i]
+            casilla2 = tablero[i + 2*columnas]
+            casilla3 = tablero[i + 3*columnas]
+            casilla4 = tablero[i + 4*columnas]
+    
+            if(casilla1 == casilla2 && casilla2 == casilla3 && casilla3 == casilla4 && casilla1 != casilla && casilla1 == color) {
+                end = true
+                console.log("End of game")
+            }
+        }
+    }
+
     const filter = (reaction, user) => {
       return ['✅', '❌'].includes(reaction.emoji.name) && !user.bot //&& user.id !== message.author.id ACTIVAR AL TERMINAR
     }
@@ -99,16 +128,19 @@ module.exports = {
                           var posicion = 0 + altura1 * 8
                           altura1 = altura1 - 1
                           casillas[posicion] = color
+                          inv()                          
                           refresh()
                           message.delete()
                           if (turn === false) {
                           turn = true
                           player = player2
+                          comprobacion(rojo)
                           game(amarillo)
                           }
                           else if (turn === true) {
                           turn = false
                           player = player1
+                          comprobacion(amarillo)
                           game(rojo)
                           }
                           break;
@@ -258,7 +290,7 @@ module.exports = {
     /*
     var columnas = 8
     
-    function comprobacion(color) {  //DESPUES DE CADA player
+    function comprobacion(color) {
         for (i=columnas; i <= numCasillas - 4*columnas; i++) {
     
             casilla1 = tablero[i]
