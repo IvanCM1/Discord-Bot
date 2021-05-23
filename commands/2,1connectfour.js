@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 module.exports = {
   name: '4row',
   code: "`connectfour`, ",
-  description: 'A game of connect 4 for you and a friend!',
+  description: 'A game of connect 4 to play with a friend!',
   usage: " ",
   aliases: ["connectfour", "connect4", "fourinarow", "4inarow", "cf"],
   execute(message) {
@@ -10,11 +10,14 @@ module.exports = {
     //CONSTANTES
     var turn = false
 
+    let end = false
+
     const player1 = message.author
 
     let player = player1
 
-    const InviteEmbed = new Discord.MessageEmbed()
+    const inviteEmbed = new Discord.MessageEmbed()
+      .setColor("#7289da")
       .setTitle("Connect Four")
       .setDescription("Click on ✅ to join the game!")
       .setThumbnail("https://i.imgur.com/9AS9wkB.png")
@@ -32,13 +35,14 @@ module.exports = {
     var altura6 = 6
     var altura7 = 6
 
-    var casillas = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", "\n",
-      casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
-      casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
-      casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
-      casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
-      casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
-      casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n"]
+    var casillas =
+      [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", "\n",
+        casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
+        casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
+        casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
+        casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
+        casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n",
+        casilla, casilla, casilla, casilla, casilla, casilla, casilla, "\n"]
 
     var numCasillas = casillas.length
 
@@ -55,7 +59,7 @@ module.exports = {
     refresh()
 
     function inv() {
-      if (casillas[0] !== ":one:" || casillas[1] !== ":two:" || casillas[2] !== ":three:" || casillas[3] !== ":four:" || casillas[4] !== ":five:" || casillas[5] !== ":six:" || casillas[6] !== ":seven:")
+      if (casillas[0] !== ":one:" || casillas[1] !== ":two:" || casillas[2] !== ":three:" || casillas[3] !== ":four:" || casillas[4] !== ":five:" || casillas[5] !== ":six:" || casillas[6] !== ":seven:") {
         casillas[0] = ":one:"
         casillas[1] = ":two:"
         casillas[2] = ":three:"
@@ -63,24 +67,66 @@ module.exports = {
         casillas[4] = ":five:"
         casillas[5] = ":six:"
         casillas[6] = ":seven:"
-        message.channel.send("**Invalid choice, column full**")
+        message.channel.send("```Invalid choice, column full```")
+          .then(message => {
+            setTimeout(function() { message.delete() }, 10000)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
     }
 
-    var columnas = 8
-    
     function comprobacion(color) {
-        for (i=columnas; i <= numCasillas - 4*columnas; i++) {
-    
-            casilla1 = tablero[i]
-            casilla2 = tablero[i + 2*columnas]
-            casilla3 = tablero[i + 3*columnas]
-            casilla4 = tablero[i + 4*columnas]
-    
-            if(casilla1 == casilla2 && casilla2 == casilla3 && casilla3 == casilla4 && casilla1 != casilla && casilla1 == color) {
-                end = true
-                console.log("End of game")
-            }
+
+      for (i = 8; i < 31; i++) { //Vertical
+
+        let casilla1 = casillas[i]
+        let casilla2 = casillas[i + 8]
+        let casilla3 = casillas[i + 16]
+        let casilla4 = casillas[i + 24]
+
+        if (casilla1 === color && casilla2 === color && casilla3 === color && casilla4 === color) {
+          end = true
+          console.log("End of game")
         }
+      }
+      for (i = 8; i < 52; i++) { //Horizontal
+
+        let casilla1 = casillas[i]
+        let casilla2 = casillas[i + 1]
+        let casilla3 = casillas[i + 2]
+        let casilla4 = casillas[i + 3]
+
+        if (casilla1 === color && casilla2 === color && casilla3 === color && casilla4 === color) {
+          end = true
+          console.log("End of game")
+        }
+      }
+      for (i = 8; i < 28; i++) { //Diagonal abajo derecha
+
+        let casilla1 = casillas[i]
+        let casilla2 = casillas[i + 9]
+        let casilla3 = casillas[i + 18]
+        let casilla4 = casillas[i + 27]
+
+        if (casilla1 === color && casilla2 === color && casilla3 === color && casilla4 === color) {
+          end = true
+          console.log("End of game")
+        }
+      }
+      for (i = 11; i < 31; i++) { //Diagonal abajo izquierda
+
+        let casilla1 = casillas[i]
+        let casilla2 = casillas[i + 7]
+        let casilla3 = casillas[i + 14]
+        let casilla4 = casillas[i + 21]
+
+        if (casilla1 === color && casilla2 === color && casilla3 === color && casilla4 === color) {
+          end = true
+          console.log("End of game")
+        }
+      }
     }
 
     const filter = (reaction, user) => {
@@ -91,7 +137,7 @@ module.exports = {
     }
 
     //Invitación a unirse
-    message.channel.send("**Connect Four**").then(function(message) {
+    message.channel.send(inviteEmbed).then(function(message) {
       message.react('✅')
       message.react('❌')
 
@@ -105,170 +151,210 @@ module.exports = {
             case '✅':
               message.delete()
 
-                //Funcion del juego
+              //Funcion del juego
               function game(color) {
 
-                message.channel.send("**" + player.username + "**'s turn\n" + tablero)
-                .then(function(message) {
+                if (end === true) {
+                  message.channel.send(tablero)
+                  if (color = rojo) {
+                    player = player2
+                    const winEmbed = new Discord.MessageEmbed()
+                      .setAuthor("Game finished!")
+                      .setTitle(player.username + " wins")
+                      .setColor("#FFFF00")
+                    message.channel.send(winEmbed)
+                  }
+                  else if (color = amarillo) {
+                    player = player1
+                    const winEmbed = new Discord.MessageEmbed()
+                      .setAuthor("Game finished!")
+                      .setTitle(player.username + " wins")
+                      .setColor("#FF0000")
+                    message.channel.send(winEmbed)
+                  }
+                }
+                else {
+                  message.channel.send(color + " **" + player.username + "**'s turn\n" + tablero)
+                    .then(function(message) {
 
-                  message.react("1️⃣")
-                  message.react("2️⃣")
-                  message.react("3️⃣")
-                  message.react("4️⃣")
-                  message.react("5️⃣")
-                  message.react("6️⃣")
-                  message.react("7️⃣")
-                    .then(() => message.awaitReactions(filter2, { max: 1, time: 120000, errors: ['time'] }))
-                    .then(collected => {
+                      message.react("1️⃣")
+                      message.react("2️⃣")
+                      message.react("3️⃣")
+                      message.react("4️⃣")
+                      message.react("5️⃣")
+                      message.react("6️⃣")
+                      message.react("7️⃣")
+                        .then(() => message.awaitReactions(filter2, { max: 1, time: 120000, errors: ['time'] }))
+                        .then(collected => {
 
-                      const reaction = collected.first();
+                          const reaction = collected.first();
 
-                      switch (reaction.emoji.name) {
-                        case "1️⃣":
-                          var posicion = 0 + altura1 * 8
-                          altura1 = altura1 - 1
-                          casillas[posicion] = color
-                          inv()                          
-                          refresh()
-                          message.delete()
-                          if (turn === false) {
-                          turn = true
-                          player = player2
-                          comprobacion(rojo)
-                          game(amarillo)
-                          }
-                          else if (turn === true) {
-                          turn = false
-                          player = player1
-                          comprobacion(amarillo)
-                          game(rojo)
-                          }
-                          break;
+                          switch (reaction.emoji.name) {
+                            case "1️⃣":
+                              var posicion = 0 + altura1 * 8
+                              altura1 = altura1 - 1
+                              casillas[posicion] = color
+                              inv()
+                              refresh()
+                              message.delete()
+                              if (turn === false) {
+                                comprobacion(rojo)
+                                turn = true
+                                player = player2
+                                game(amarillo)
+                              }
+                              else if (turn === true) {
+                                comprobacion(amarillo)
+                                turn = false
+                                player = player1
+                                game(rojo)
+                              }
+                              break;
 
-                        case "2️⃣":
-                          var posicion = 1 + altura2 * 8
-                          altura2 = altura2 - 1
-                          casillas[posicion] = color
-                          refresh()
-                          message.delete()
-                          if (turn === false) {
-                          turn = true
-                          player = player2
-                          game(amarillo)
-                          }
-                          else if (turn === true) {
-                          turn = false
-                          player = player1
-                          game(rojo)
-                          }
-                          break;
+                            case "2️⃣":
+                              var posicion = 1 + altura2 * 8
+                              altura2 = altura2 - 1
+                              casillas[posicion] = color
+                              inv()
+                              refresh()
+                              message.delete()
+                              if (turn === false) {
+                                turn = true
+                                player = player2
+                                comprobacion(rojo)
+                                game(amarillo)
+                              }
+                              else if (turn === true) {
+                                turn = false
+                                player = player1
+                                comprobacion(amarillo)
+                                game(rojo)
+                              }
+                              break;
 
-                        case "3️⃣":
-                          var posicion = 2 + altura3 * 8
-                          altura3 = altura3 - 1
-                          casillas[posicion] = color
-                          refresh()
-                          message.delete()
-                          if (turn === false) {
-                          turn = true
-                          player = player2
-                          game(amarillo)
-                          }
-                          else if (turn === true) {
-                          turn = false
-                          player = player1
-                          game(rojo)
-                          }
-                          break;
+                            case "3️⃣":
+                              var posicion = 2 + altura3 * 8
+                              altura3 = altura3 - 1
+                              casillas[posicion] = color
+                              inv()
+                              refresh()
+                              message.delete()
+                              if (turn === false) {
+                                turn = true
+                                player = player2
+                                comprobacion(rojo)
+                                game(amarillo)
+                              }
+                              else if (turn === true) {
+                                turn = false
+                                player = player1
+                                comprobacion(amarillo)
+                                game(rojo)
+                              }
+                              break;
 
-                        case "4️⃣":
-                          var posicion = 3 + altura4 * 8
-                          altura4 = altura4 - 1
-                          casillas[posicion] = color
-                          refresh()
-                          message.delete()
-                          if (turn === false) {
-                          turn = true
-                          player = player2
-                          game(amarillo)
-                          }
-                          else if (turn === true) {
-                          turn = false
-                          player = player1
-                          game(rojo)
-                          }
-                          break;
+                            case "4️⃣":
+                              var posicion = 3 + altura4 * 8
+                              altura4 = altura4 - 1
+                              casillas[posicion] = color
+                              inv()
+                              refresh()
+                              message.delete()
+                              if (turn === false) {
+                                turn = true
+                                player = player2
+                                comprobacion(rojo)
+                                game(amarillo)
+                              }
+                              else if (turn === true) {
+                                turn = false
+                                player = player1
+                                comprobacion(amarillo)
+                                game(rojo)
+                              }
+                              break;
 
-                        case "5️⃣":
-                          var posicion = 4 + altura5 * 8
-                          altura5 = altura5 - 1
-                          casillas[posicion] = color
-                          refresh()
-                          message.delete()
-                          if (turn === false) {
-                          turn = true
-                          player = player2
-                          game(amarillo)
-                          }
-                          else if (turn === true) {
-                          turn = false
-                          player = player1
-                          game(rojo)
-                          }
-                          break;
+                            case "5️⃣":
+                              var posicion = 4 + altura5 * 8
+                              altura5 = altura5 - 1
+                              casillas[posicion] = color
+                              inv()
+                              refresh()
+                              message.delete()
+                              if (turn === false) {
+                                turn = true
+                                player = player2
+                                comprobacion(rojo)
+                                game(amarillo)
+                              }
+                              else if (turn === true) {
+                                turn = false
+                                player = player1
+                                comprobacion(amarillo)
+                                game(rojo)
+                              }
+                              break;
 
-                        case "6️⃣":
-                          var posicion = 5 + altura6 * 8
-                          altura6 = altura6 - 1
-                          casillas[posicion] = color
-                          refresh()
-                          message.delete()
-                          if (turn === false) {
-                          turn = true
-                          player = player2
-                          game(amarillo)
-                          }
-                          else if (turn === true) {
-                          turn = false
-                          player = player1
-                          game(rojo)
-                          }
-                          break;
+                            case "6️⃣":
+                              var posicion = 5 + altura6 * 8
+                              altura6 = altura6 - 1
+                              casillas[posicion] = color
+                              inv()
+                              refresh()
+                              message.delete()
+                              if (turn === false) {
+                                turn = true
+                                player = player2
+                                comprobacion(rojo)
+                                game(amarillo)
+                              }
+                              else if (turn === true) {
+                                turn = false
+                                player = player1
+                                comprobacion(amarillo)
+                                game(rojo)
+                              }
+                              break;
 
-                        case "7️⃣":
-                          var posicion = 6 + altura7 * 8
-                          altura7 = altura7 - 1
-                          casillas[posicion] = color
-                          refresh()
-                          message.delete()
-                          if (turn === false) {
-                          turn = true
-                          player = player2
-                          game(amarillo)
-                          }
-                          else if (turn === true) {
-                          turn = false
-                          player = player1
-                          game(rojo)
-                          }
-                          break;
-                      } //end of switch
-                    }) //collected2
+                            case "7️⃣":
+                              var posicion = 6 + altura7 * 8
+                              altura7 = altura7 - 1
+                              casillas[posicion] = color
+                              inv()
+                              refresh()
+                              message.delete()
+                              if (turn === false) {
+                                turn = true
+                                player = player2
+                                comprobacion(rojo)
+                                game(amarillo)
+                              }
+                              else if (turn === true) {
+                                turn = false
+                                player = player1
+                                comprobacion(amarillo)
+                                game(rojo)
+                              }
+                              break;
+                          } //end of switch
+                        }) //collected2
 
-                    .catch(collected => {
-                      message.channel.send('The game was canceled as 2 minutes passed without any interaction');
-                    })
-                }) //function 
+                        .catch(collected => {
+                          console.log(collected)
+                          message.channel.send('The game was canceled as 2 minutes passed without any interaction');
+                        })
+                    }) //function 
+                }
               }
               //end of functions
               game(rojo)
 
 
 
-              
-              
-              
-              
+
+
+
+
               break;
 
             case '❌':
@@ -281,30 +367,5 @@ module.exports = {
           message.reply('the game was canceled as no-one joined the game');
         })
     })
-
-
-
-
-
-
-    /*
-    var columnas = 8
-    
-    function comprobacion(color) {
-        for (i=columnas; i <= numCasillas - 4*columnas; i++) {
-    
-            casilla1 = tablero[i]
-            casilla2 = tablero[i + 2*columnas]
-            casilla3 = tablero[i + 3*columnas]
-            casilla4 = tablero[i + 4*columnas]
-    
-            if(casilla1 == casilla2 && casilla2 == casilla3 && casilla3 == casilla4 && casilla1 != casilla && casilla1 == color) {
-                end = true
-            }
-        }
-    }
-    comprobacion(rojo)
-    */
-
   }
 }
