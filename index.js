@@ -1,8 +1,8 @@
-require('dotenv').config()
+const envvar = require('envvar');
 const fs = require('fs');
 const Discord = require('discord.js');
 const db = require('quick.db');
-const token = process.env.CLIENT_TOKEN
+const token = envvar.string("CLIENT_TOKEN")
 let prefix = "?"
 
 const client = new Discord.Client();
