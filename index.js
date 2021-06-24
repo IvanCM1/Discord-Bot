@@ -24,7 +24,7 @@ client.once('ready', () => {
 
   client.user.setActivity('@Okami', { type: 'LISTENING'/*, url: "https://www.twitch.tv/auronplay"*/ });
 });
-
+/*
 client.on('message', message => {
   if (message.author.bot) return;
 
@@ -194,14 +194,14 @@ client.on('message', message => {
         }
       }
 });
-
+*/
 //Web server
-const http = require('http');
+/*const http = require('http');
 const server = http.createServer((req, res) => {
   res.writeHead(200);
   res.end('ok');
 });
-server.listen(3000);
+server.listen(3000)*/
 
 //Logins the bot into discord
 client.login(token);
