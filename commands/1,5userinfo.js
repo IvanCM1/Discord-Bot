@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const ColorThief = require('colorthief');
+
 module.exports = {
     name: "userinfo",
     code: "`userinfo`",
