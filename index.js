@@ -1,9 +1,10 @@
+require('dotenv').config()
 const fs = require('fs');
 const Discord = require('discord.js');
 const simpleYT = require('simpleyt')
 const ytdl = require('ytdl-core');
 const { getSong } = require('genius-lyrics-api');
-const token = "NzE2MDAyOTAyNTIyNzI0NDQz.XtFbqg.NrUeajuVluCViPtUx8KiFwHDWPk"
+const token = process.env.CLIENT_TOKEN
 const queue = new Map()
 let db = require('quick.db');
 let prefix = "?"
