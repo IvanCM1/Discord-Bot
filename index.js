@@ -2,12 +2,10 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const simpleYT = require('simpleyt')
 const ytdl = require('ytdl-core');
-const { getLyrics, getSong } = require('genius-lyrics-api');
-const ownerID = process.env["OWNER_ID"]
-const token = process.env["CLIENT_TOKEN"]
+const { getSong } = require('genius-lyrics-api');
+const token = "NzE2MDAyOTAyNTIyNzI0NDQz.XtFbqg.NrUeajuVluCViPtUx8KiFwHDWPk"
 const queue = new Map()
-const Database = require("@replit/database")
-const db = new Database()
+let db = require('quick.db');
 let prefix = "?"
 
 const client = new Discord.Client();
@@ -90,8 +88,7 @@ client.on('message', message => {
   else if (mention.id == botID) {
     const data = []
     const { commands } = message.client
-    db.get(message.guild.id)
-      .then(value => {
+    let value = db.get(message.guild.id)
         if (!value) {
           data.push(commands.map(command => command.code).join(' '));
           const HelpEmbed = new Discord.MessageEmbed()
@@ -111,10 +108,9 @@ client.on('message', message => {
             .setFooter('Use ' + prefix + 'help <command name> to get info on a specific command')
           message.channel.send(HelpEmbed)
         }
-      })
   }
-  db.get(message.guild.id)
-    .then(value => {
+  let value = db.get(message.guild.id)
+
       if (!value) {
 
         var msg = message.content.toLowerCase()
@@ -1528,17 +1524,14 @@ client.on('message', message => {
           }
         }//end of if all commands
       }
-    })
-
-
 }) //end of client.on
 
 
 client.on('message', message => {
   //db.set(message.guild.id, "?").then(() => {})
   if (message.author.bot) return;
-  db.get(message.guild.id)
-    .then(value => {
+  let value = db.get(message.guild.id)
+ 
       if (!value) {
         if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -1619,11 +1612,6 @@ client.on('message', message => {
           message.reply('there was an error trying to execute that command!');
         }
       }
-    })
-    .catch(err => {
-      console.log(err)
-      message.channel.send("ERR")
-    })
 });
 
 //Web server
