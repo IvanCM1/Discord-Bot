@@ -95,7 +95,7 @@ client.on('message', message => {
         if (!value) {
           data.push(commands.map(command => command.code).join(' '));
           const HelpEmbed = new Discord.MessageEmbed()
-            .setColor("#99AAB5")
+            .setColor("#7289DA")
             .setTitle("Bot Commands")
             .setDescription("The prefix of this bot is `" + prefix + "`\n\n" + data)
             .setFooter('Use ' + prefix + 'help <command name> to get info on a specific command')
@@ -105,7 +105,7 @@ client.on('message', message => {
           prefix = value
           data.push(commands.map(command => command.code).join(' '));
           const HelpEmbed = new Discord.MessageEmbed()
-            .setColor("#99AAB5")
+            .setColor("#7289DA")
             .setTitle("Bot Commands")
             .setDescription("The prefix of this bot is `" + prefix + "`\n\n" + data)
             .setFooter('Use ' + prefix + 'help <command name> to get info on a specific command')
