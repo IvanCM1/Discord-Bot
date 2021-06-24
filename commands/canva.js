@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
-//test
+const ColorThief = require('colorthief');
 
 module.exports = {
   name: 'canva',
@@ -11,31 +11,69 @@ module.exports = {
   aliases: [" "],
   execute(message, args) {
 
-    const canvas = Canvas.createCanvas(600, 300);
+    const canvas = Canvas.createCanvas(1024, 500);
     const ctx = canvas.getContext('2d');
 
-    Canvas.loadImage('https://discordjs.guide/assets/img/canvas-preview.cced9193.png').then(background => {
 
-      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+      //Texto
 
-      	ctx.strokeStyle = '#74037b';
-      	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+      let text = "Welcome to the server"   //añadir otro texto debajo con el nombre del miembro
+
+      Canvas.registerFont('uni-sans.heavy-caps.otf', { family: 'uni sans' })
+
+      ctx.textAlign = "center";
+	    ctx.fillStyle = '#ffffff';
+	  
+      let fontSize = 70
+
+      let adj = canvas.width / 1.25
+
+      let textLength = ctx.measureText(text).width
+
+      do {
+        fontSize = fontSize - 1
+        ctx.font = fontSize + "px uni sans"
+        textLength = ctx.measureText(text).width
+
+      }
+      while (textLength > adj)
+
+      ctx.fillText(text, canvas.width/2, canvas.height * 0.75);
+
+      //Avatar
+      let x = canvas.width/2
+      let y = canvas.height/3
+      let r = 125
 
 	    ctx.beginPath();
-	    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	    ctx.arc(x, y, r, 0, Math.PI * 2, true);
 	    ctx.closePath();
 	    ctx.clip();
 
-	    Canvas.loadImage(message.author.displayAvatarURL({ format: 'png' })).then(avatar => {
-	    ctx.drawImage(avatar, 25, 25, 200, 200);
+      let avatar = message.author.displayAvatarURL({format: "png", dynamic: true})
 
+	    Canvas.loadImage(avatar).then(avatar => {
+	    ctx.drawImage(avatar, x - r, y - r, 2*r, 2*r);
+
+      //Dibujos
+
+      ColorThief.getColor(avatar)
+        .then(color => {
+          console.log(color)
+
+	    ctx.beginPath();
+	    ctx.arc(x, y, r, 0, Math.PI * 2, true);
+      ctx.lineWidth = 20;
+      ctx.strokeStyle = "pink";
+	    ctx.stroke();
+
+        })
+        .catch(err => { console.log(err) })
 
       const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-      message.channel.send(`Welcome to the server!`, attachment);
+      message.channel.send("Welcome to the server!", attachment);
       })
-    })
-
 
   }
 }

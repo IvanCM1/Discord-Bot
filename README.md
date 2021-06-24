@@ -1,6 +1,7 @@
+
 # Okami-Discord-Bot
 
-```javascript
+```js
 const fasd = "dafsg"
 if (fafa) {
   console.log(dsaf)

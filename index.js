@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 const simpleYT = require('simpleyt')
 const ytdl = require('ytdl-core');
 const { getLyrics, getSong } = require('genius-lyrics-api');
-const ownerID = process.env.OWNER_ID
-const token = process.env.CLIENT_TOKEN
+const ownerID = process.env["OWNER_ID"]
+const token = process.env["CLIENT_TOKEN"]
 const queue = new Map()
 const Database = require("@replit/database")
 const db = new Database()
@@ -12,6 +12,8 @@ let prefix = "?"
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+
+require('discord-buttons')(client)
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -23,9 +25,7 @@ for (const file of commandFiles) {
 client.once('ready', () => {
 
   console.log('Ready!');
-  //client.guilds.cache.map(guild => {
-  //  console.log(client.user.id)
-  //})
+  console.log("Working in " + client.guilds.cache.size + " servers!")
 
   client.user.setActivity('@Okami', { type: 'LISTENING'/*, url: "https://www.twitch.tv/auronplay"*/ });
 });
@@ -1572,7 +1572,7 @@ client.on('message', message => {
         }
 
         try {
-          command.execute(message, args);
+          command.execute(message, args, client);
         } catch (error) {
           console.error(error);
           message.reply('there was an error trying to execute that command!');
@@ -1613,7 +1613,7 @@ client.on('message', message => {
         }
 
         try {
-          command.execute(message, args);
+          command.execute(message, args, client);
         } catch (error) {
           console.error(error);
           message.reply('there was an error trying to execute that command!');
@@ -1636,3 +1636,37 @@ server.listen(3000);
 
 //Logins the bot into discord
 client.login(token);
+
+// slash stuff
+
+client.on("ready", async () => {
+
+  const commands = await client.api
+    .applications(client.user.id)
+    .guilds("711875542751641651")
+    .commands.get()
+
+  console.log(commands)
+
+  const guildID = "711875542751641651"
+
+  const getApp = (guildID) => {
+    const app = client.api.applications(client.user.id)
+    if (guildID) {
+      app.guilds(guildID)
+    }
+    return app
+  }
+/*
+  //await getApp("711875542751641651").commands("851909436426420275").delete()
+  //await getApp("711875542751641651").commands("853390156039716884").delete()
+  //await getApp("711875542751641651").commands("853434666572709888").delete()
+  //await getApp("711875542751641651").commands("853731753579380766").delete()*/
+})
+
+
+
+
+
+
+

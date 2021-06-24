@@ -15,6 +15,7 @@ module.exports = {
             //EMBED
             ColorThief.getColor(SelfAvatar)
               .then(color => {
+                console.log(color)
                 const SelfInfo = new Discord.MessageEmbed()
                 .setColor(color)
                 .setTitle(message.author.username + "'s info")

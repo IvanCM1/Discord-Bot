@@ -156,7 +156,7 @@ module.exports = {
 
                 if (end === true) {
                   message.channel.send(tablero)
-                  if (color = rojo) {
+                  if (color == rojo) {
                     player = player2
                     const winEmbed = new Discord.MessageEmbed()
                       .setAuthor("Game finished!")
@@ -164,7 +164,7 @@ module.exports = {
                       .setColor("#FFFF00")
                     message.channel.send(winEmbed)
                   }
-                  else if (color = amarillo) {
+                  else if (color == amarillo) {
                     player = player1
                     const winEmbed = new Discord.MessageEmbed()
                       .setAuthor("Game finished!")
