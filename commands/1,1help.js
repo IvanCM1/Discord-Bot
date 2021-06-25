@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const db = require('quick.db');
+const Database = require("@replit/database")
+const db = new Database()
 let prefix = "?";
 
 module.exports = {
@@ -11,7 +12,8 @@ module.exports = {
     execute(message, args){
         const data = []
         const { commands } = message.client
-        const value = db.get(message.guild.id)
+        db.get(message.guild.id)
+          .then(value => {
             if (!value) {
               if (!args.length) {
             data.push(commands.map(command => command.code ).join(' '));
@@ -65,5 +67,5 @@ module.exports = {
             )
             message.channel.send(CommandHelp)
           }
-      }   
+      }})   
     }}
