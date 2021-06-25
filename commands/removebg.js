@@ -1,7 +1,10 @@
 const Discord = require('discord.js');
+const envvar = require('envvar');
+require('dotenv').config()
 var request = require('request');
 var fs = require('fs');
-const APIkey = process.env[API_KEY]
+const APIkey = envvar.string("API_KEY") || process.env["API_KEY"]
+const token = envvar.string("CLIENT_TOKEN") || process.env["CLIENT_TOKEN"]
 module.exports = {
   name: 'removebg',
   code: "`remove`, ",
