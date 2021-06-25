@@ -6,8 +6,6 @@ const db = require('quick.db');
 const token = envvar.string("CLIENT_TOKEN") || process.env["CLIENT_TOKEN"]
 let prefix = "?"
 
-console.log(token)
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -112,11 +110,10 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-  //db.set(message.guild.id, "?").then(() => {})
   if (message.author.bot) return;
   let value = db.get(message.guild.id)
  
-      if (!value) {
+      //if (!value) {
         if (!message.content.startsWith(prefix) || message.author.bot) return;
 
         const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -154,8 +151,8 @@ client.on('message', message => {
           console.error(error);
           message.reply('there was an error trying to execute that command!');
         }
-      }
-      else {
+      //}
+      /*else {
         prefix = value
 
         if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -195,16 +192,8 @@ client.on('message', message => {
           console.error(error);
           message.reply('there was an error trying to execute that command!');
         }
-      }
+      }*/
 });
-
-//Web server
-/*const http = require('http');
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end('ok');
-});
-server.listen(3000)*/
 
 //Logins the bot into discord
 client.login(token);
