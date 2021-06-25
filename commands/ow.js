@@ -1,8 +1,7 @@
 const Discord = require('discord.js');
 const ow = require('overwatch-stats-api');
 const ColorThief = require('colorthief');
-const Database = require("@replit/database")
-const db = new Database()
+const db = require("quick.db")
 
 module.exports = {
   name: 'ow',
@@ -110,8 +109,7 @@ module.exports = {
       }
 
   if (!args[0]) {
-    db.get("ow" + message.author.id)
-        .then(value => {
+    const value = db.get("ow" + message.author.id)
           ow.getAllStats(value.battletag, value.platform)
           .then(stats => {
             stat(stats)
@@ -120,8 +118,6 @@ module.exports = {
           .catch(err => {
           console.log(err)
           })
-
-        })
         .catch(err => {
           message.channel.send("No BattleTag provided or profile saved")
           console.log(err)
@@ -144,7 +140,6 @@ module.exports = {
       }
 
       db.set("ow" + message.author.id, profile)
-      .then(() => {});
 
       stat(stats)
     })

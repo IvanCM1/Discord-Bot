@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 var request = require('request');
 var fs = require('fs');
-const APIkey = process.env.API_KEY
+const APIkey = process.env[API_KEY]
 module.exports = {
   name: 'removebg',
   code: "`remove`, ",
