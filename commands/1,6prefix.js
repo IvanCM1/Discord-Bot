@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
-const Database = require("@replit/database")
-const db = new Database()
+const db = require('quick.db');
 
 //HACER COMANDO PARA ADMINSITRAR TODO DE LAS DATABASES
 
@@ -15,15 +14,13 @@ module.exports = {
     execute(message, args) {
     
     if (!args[0]) {
-      db.get(message.guild.id)
-        .then(value => {
+      const value = db.get(message.guild.id)
           if (!value) {
             message.channel.send("?")
             }
           else {
             message.channel.send(value)
           }
-        })
     }
     else if (args[0].includes("+") || args[0].includes("&") || args[0].includes("%")) {
       message.channel.send(args[0] + " is not a valid prefix")

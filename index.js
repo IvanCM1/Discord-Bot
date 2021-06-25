@@ -111,7 +111,7 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.author.bot) return;
-  let value = db.get(message.guild.id)
+  const value = db.get(message.guild.id)
  
       //if (!value) {
         if (!message.content.startsWith(prefix) || message.author.bot) return;
