@@ -5,6 +5,8 @@ const db = require('quick.db');
 const token = envvar.string("CLIENT_TOKEN")
 let prefix = "?"
 
+console.log(token)
+
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
