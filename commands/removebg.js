@@ -30,7 +30,7 @@ module.exports = {
       if (error) return console.error('Request failed:', error);
       if (response.statusCode != 200) {
         console.error('Error:', response.statusCode, body.toString('utf8'))
-        message.channel.send("**There was an error removing the background from that image, this could be because:**\n- The background couldn't be detected in this image\n- The image already has no background\n- The link must link to an image\n- This bot can only remove 50 backgrounds a month");
+        message.channel.send("**There was an error removing the background from that image, this could be because:**\n- The background couldn't be detected in this image\n- The image already has no background\n- The link must be to a png or jpg\n- This bot can only remove 50 backgrounds a month");
       }
       else if (response.statusCode == 200) {
         
