@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { MessageButton, MessageActionRow } = require('discord-buttons');
 const ytsr = require('ytsr');
 const ytdl = require('ytdl-core');
-const { ClientCredentials, ResourceOwnerPassword, AuthorizationCode } = require('simple-oauth2')
+const { AuthorizationCode } = require('simple-oauth2')
 const { getSong } = require('genius-lyrics-api');
 const queue = new Map()
 

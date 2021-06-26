@@ -20,7 +20,7 @@ module.exports = {
 	async execute (message) {
  
         //Selects a random subreddit
-        let subreddits = ["memes", "dankmemes", "wholesomememes", "raimimemes", "prequelmemes", "historymemes", "me_irl"]
+        let subreddits = ["memes", "dankmemes", "wholesomememes", "historymemes", "me_irl"]
         let randomSubreddit = Math.floor(Math.random() * subreddits.length)
         let subreddit = subreddits[randomSubreddit]
         //Submission
