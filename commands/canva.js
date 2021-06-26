@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
-const ColorThief = require('colorthief');
+const colorThief = require('color-thief-node');
 
 module.exports = {
   name: 'canva',
@@ -57,7 +57,7 @@ module.exports = {
 
       //Dibujos
 
-      ColorThief.getColor(avatar)
+      colorThief.getColorFromURL(avatar)
         .then(color => {
           console.log(color)
 

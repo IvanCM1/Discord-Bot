@@ -1,36 +1,42 @@
 const Discord = require('discord.js');
-const { Submission } = require('snoowrap');
-const snoowrap = require('snoowrap');
+const rd = require("redditdata")
+
+let opts = {
+  limit: 50,
+  stickies: false,
+  videos: false,
+  nsfw: true,
+  spoiler: true,
+  onlyAwarded: true,
+  minScore: 1000
+}
+
 module.exports = {
   name: 'meme',
   code: "`meme`, ",
   description: 'A fresh meme from Reddit!',
   usage: "",
   aliases: ["memes"],
-	execute(message) {
-        //Authenticates to the reddit bot
-        const r = new snoowrap({
-            userAgent: 'justsomeluciomain',
-            clientId: 'e3LHFoy81Liiwg',
-            clientSecret: 'ufnacK3uokxvXUYvamSMp4p6nSxj3Q',
-            refreshToken: '306992643071-Peqi7X-guOKj38NbkFqOYZK3flGUpg'
-          });
+	async execute (message) {
+ 
         //Selects a random subreddit
-        var subreddits = ["memes", "dankmemes"]
-        var RandomSubreddit = Math.floor(Math.random() * subreddits.length)
-        var subreddit = subreddits[RandomSubreddit]
+        let subreddits = ["memes", "dankmemes", "wholesomememes", "raimimemes", "prequelmemes", "historymemes", "me_irl"]
+        let randomSubreddit = Math.floor(Math.random() * subreddits.length)
+        let subreddit = subreddits[randomSubreddit]
         //Submission
-        r.getSubreddit(subreddit).getHot().then(submission => {
-            var hotPosts = submission.length - 2
-            var RandomPost = Math.floor(Math.random() * hotPosts) + 2
-            var post = submission[RandomPost]
-            var upvotes = Math.round(post.ups/1000)
+
+        let hotPosts = await rd.getSubreddit(subreddit, opts)
+        let randomPost = Math.floor(Math.random() * hotPosts.length)
+        let post = hotPosts[randomPost]
+
+        let upvotes = Math.round(post.ups/1000)
+
             const MemeEmbed = new Discord.MessageEmbed()
               .setColor("RANDOM")
+              .setAuthor(`u/${post.author}`, "", `https://www.reddit.com/u/${post.author}`)
               .setTitle(post.title)
               .setURL("http://reddit.com" + post.permalink)
 		        	.setImage(post.url)
 			        .setFooter("🔥 " + upvotes + "k | 💬 " + post.num_comments + " | r/" + subreddit)
       	  	message.channel.send(MemeEmbed)
-        })        
 }};

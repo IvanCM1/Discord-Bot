@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const ow = require('overwatch-stats-api');
-const ColorThief = require('colorthief');
+const colorThief = require('color-thief-node');
 const db = require("quick.db")
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
 	execute(message, args) {
 
       function stat(stats) {
-      ColorThief.getColor(stats.iconURL)
+      colorThief.getColorFromURL(stats.iconURL)
         .then(color => {
 
       let level = stats.prestige * 100 

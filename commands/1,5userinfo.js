@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const ColorThief = require('colorthief');
+const colorThief = require('color-thief-node');
 
 module.exports = {
     name: "userinfo",
@@ -31,7 +31,7 @@ module.exports = {
       }
 
       async function info(user, member) {
-        color = await ColorThief.getColor(user.displayAvatarURL({format: "png", dynamic: true}))
+        color = await colorThief.getColorFromURL(user.displayAvatarURL({format: "png", dynamic: true}))
 
         let embed = new Discord.MessageEmbed()
           .setColor(color)
