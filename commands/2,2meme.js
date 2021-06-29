@@ -33,10 +33,10 @@ module.exports = {
 
             const MemeEmbed = new Discord.MessageEmbed()
               .setColor("RANDOM")
-              .setAuthor(`u/${post.author}`, "", `https://www.reddit.com/u/${post.author}`)
+              //.setAuthor(`u/${post.author}`, "", `https://www.reddit.com/u/${post.author}`)
               .setTitle(post.title)
               .setURL("http://reddit.com" + post.permalink)
 		        	.setImage(post.url)
-			        .setFooter("🔥 " + upvotes + "k | 💬 " + post.num_comments + " | r/" + subreddit)
+			        .setFooter("🔥 " + upvotes + "k | 💬 " + post.num_comments + " | u/" + post.author)
       	  	message.channel.send(MemeEmbed)
 }};
