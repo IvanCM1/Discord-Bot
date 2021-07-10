@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+/*const Discord = require('discord.js');
 
 module.exports = {
   name: "volume",
@@ -98,4 +98,4 @@ message.member.voice.channel.join()
 }
 })
 }
-}}
+}}*/

@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+/*const Discord = require('discord.js');
 
 module.exports = {
   name: "pause",
@@ -57,4 +57,4 @@ message.member.voice.channel.join()
 }
 })
 }
-}}
+}}*/

@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
+const rd = require("redditdata")
 const { Submission } = require('snoowrap');
 const snoowrap = require('snoowrap');
+
 module.exports = {
   name: 'subreddit',
   code: "`subreddit`, ",

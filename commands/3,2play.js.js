@@ -14,10 +14,10 @@ let votes = 0
 let voters = []
 
 module.exports = {
-  name: 'music',
-  code: "`music`, ",
-  description: "Plays music in your current channel",
-  usage: " ",
+  name: 'play',
+  code: "`play`, ",
+  description: "Plays audio from a youtube video in your current channel",
+  usage: "<title or link>",
   aliases: [" "],
   async execute(message, args, client) {
 
