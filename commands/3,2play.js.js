@@ -155,7 +155,7 @@ module.exports = {
                   )
                   .setThumbnail(song.bestThumbnail.url)
 
-            b.defer()
+            b.reply.defer()
 
             const state = connection.dispatcher.paused
 
@@ -207,7 +207,7 @@ module.exports = {
               voters = voters.filter(e => e !== b.clicker.user)
             }
             else {
-              b.defer()
+              b.reply.defer()
               const songQueue = queue.get(b.message.guild.id)
               songQueue.songs.shift()
                 const endEmbed = new Discord.MessageEmbed()
@@ -242,7 +242,7 @@ module.exports = {
 
           case "stop":
           if (b.clicker.user.id === message.author.id || b.clicker.member.roles.cache.some(role => role.name.toLowerCase() == "dj") || b.clicker.member.hasPermission("ADMINISTRATOR")) {
-            b.defer()
+            b.reply.defer()
             const serverQueue = queue.get(b.message.guild.id)
       
             serverQueue.songs = []
@@ -373,7 +373,7 @@ module.exports = {
                 b.reply.send("The volume can't be increased past 100%", true)
               }
               else {
-              b.defer()
+              b.reply.defer()
               logVolume = (Math.round((logVolume + 0.1)*100))/100
               dispatcher.setVolumeLogarithmic(logVolume)
 
@@ -403,7 +403,7 @@ module.exports = {
                 b.reply.send("The volume can't be decreased past 0%", true)
               }
               else {
-              b.defer()
+              b.reply.defer()
               logVolume = (Math.round((logVolume - 0.1)*100))/100
               dispatcher.setVolumeLogarithmic(logVolume)
 

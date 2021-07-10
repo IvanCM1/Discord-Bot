@@ -198,7 +198,7 @@ module.exports = {
     // Buttons 
 
     client.on("clickButton", button => {
-      button.defer()
+      button.reply.defer()
 
       switch (button.id) {
 
